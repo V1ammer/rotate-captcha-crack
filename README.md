@@ -1,12 +1,6 @@
 # Rotate-Captcha-Crack
 
-[中文](README_zh-cn.md) | English
-
 Predict the rotation angle of given picture through CNN. This project can be used for rotate-captcha cracking.
-
-Test result:
-
-![test_result](https://user-images.githubusercontent.com/48282276/224320691-a8eefd23-392b-4580-a729-7869fa237eaa.png)
 
 Three kinds of model are implemented, as shown in the table below.
 
@@ -46,22 +40,6 @@ This project strongly suggest you to use [`uv>=0.5.3`](https://docs.astral.sh/uv
 uv sync
 ```
 
-Or, if you prefer `conda`: The following steps will create a virtual env under the working directory. You can also use a named env.
-
-```shell
-conda create -p .conda
-conda activate ./.conda
-conda install matplotlib tqdm tomli
-conda install pytorch torchvision pytorch-cuda=12.4 -c pytorch -c nvidia
-```
-
-Or, if you prefer a direct `pip`:
-
-```shell
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
-pip install .
-```
-
 ### Download the Pretrained Models
 
 Download the `*.zip` files in [Release](https://github.com/lumina37/rotate-captcha-crack/releases) and unzip them all to the `./models` dir.
@@ -78,44 +56,12 @@ uv run test_captcha.py
 
 Open `./debug.jpg` to check the result.
 
-If you do not have `uv`, please use:
-
-```shell
-python test_captcha.py
-```
-
 ### Use HTTP Server
-
-+ Install extra dependencies
-
-With `uv`:
-
-```shell
-uv pip install .[server]
-```
-
-or with `conda`:
-
-```shell
-conda install aiohttp
-```
-
-or with `pip`:
-
-```shell
-pip install .[server]
-```
 
 + Launch server
 
 ```shell
 uv run server.py
-```
-
-If you do not have `uv`, just use:
-
-```shell
-python server.py
 ```
 
 + Another Shell to Send Images

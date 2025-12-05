@@ -3,32 +3,33 @@ name = "rotate-captcha-crack"
 version = "0.6.0a1"
 authors = [{ name = "lumina37", email = "starry.qvq@gmail.com" }]
 urls = { Repository = "https://github.com/lumina37/rotate-captcha-crack" }
-dependencies = ["torch", "torchvision", "matplotlib", "tqdm", "tomli;python_version<'3.11'"]
-requires-python = ">=3.9,<3.14"
 readme = "README.md"
+requires-python = ">=3.13,<3.14"
 
-[project.optional-dependencies]
-server = ["aiohttp"]
+dependencies = [
+    "aiohttp>=3.13.2",
+    "matplotlib>=3.10.7",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0,<0.24.0",  # https://github.com/astral-sh/uv/issues/16386
+    "tqdm>=4.67.1",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
 
 [build-system]
 requires = ["uv_build>=0.9.5,<0.10.0"]
 build-backend = "uv_build"
 
-[tool.uv]
-managed = true
-
-[tool.uv.sources]
-torch = [{ index = "pytorch-cu128", marker = "platform_system != 'Darwin'" }]
-torchvision = [{ index = "pytorch-cu128", marker = "platform_system != 'Darwin'" }]
-
-[[tool.uv.index]]
-name = "pytorch-cu128"
-url = "https://download.pytorch.org/whl/cu128"
-explicit = true
-
 [tool.ruff]
 line-length = 120
-target-version = "py39"
+target-version = "py313"
 
 [tool.ruff.format]
 quote-style = "preserve"
