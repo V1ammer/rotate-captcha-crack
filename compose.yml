@@ -1,0 +1,20 @@
+services:
+  server:
+    image: docker-registry.km-union.ru/rotate-captcha-crack:latest
+    build:
+      context: .
+    command: uv run server.py
+    ports:
+      - "4396:4396"
+    labels:
+      com.centurylinklabs.watchtower.scope: rotate-captcha-crack
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: always
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_INCLUDE_RESTARTING: "true"
+      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL:-60}
+      WATCHTOWER_LABEL_ENABLE: "true"
+      WATCHTOWER_SCOPE: rotate-captcha-crack
+      TZ: Europe/Moscow
